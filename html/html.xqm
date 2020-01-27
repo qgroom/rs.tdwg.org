@@ -1,7 +1,6 @@
 xquery version "3.1";
 
 module namespace html = 'http://rs.tdwg.com/html';
-declare variable $html:stylesheetUrl := "https://www.tdwg.org/theme/css/main.css";
 
 declare function html:subdomain()
 {
@@ -111,46 +110,6 @@ declare function html:load-configuration($repoPath as xs:string,$repoName as xs:
 let $constantsDoc := http:send-request(<http:request method='get' href='{$repoPath||$repoName||'/constants.csv'}'/>)[2]
 let $xmlConstants := csv:parse($constantsDoc, map { 'header' : true(),'separator' : "," })
 return $xmlConstants/csv/record
-};
-
-(: Generate a header :)
-declare function html:generate-header() as element()
-{
-<nav class="navbar navbar-expand navbar-dark bg-secondary">
-    <div class="container">
-        <a class="navbar-brand mr-md-3" href="http://www.tdwg.org">TDWG</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-md-auto">
-            </ul>
-            <ul class="navbar-nav">
-            
-                <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/tdwg/rs.tdwg.org/blob/master/README.md">GitHub</a>
-                </li>
-            
-            </ul>
-        </div>
-    </div>
-</nav>
-};
-
-(: Generate a footer :)
-declare function html:generate-footer() as element()+
-{
- <footer>
-    <div class="container">
-		<a href="https://www.tdwg.org/"><img src="https://www.tdwg.org/theme/images/footer_logo.png"/></a>
-
-        <div class="theme-license">
-            Content on this site, made open by <a href="https://www.tdwg.org/">Biodiversity Information Standards (TDWG)</a> is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-        </div>
-    </div>
-</footer>,
-
-<script src="https://www.tdwg.org/theme/js/jquery.min.js"></script>,
-<script src="https://www.tdwg.org/theme/js/popper.min.js"></script>,
-<script src="https://www.tdwg.org/theme/js/bootstrap.min.js"></script>,
-<script src="https://www.tdwg.org/theme/js/theme.js"></script>
 };
 
 (: go through the term list or list versions records and pull the metadata for the particular list. There should be exactly one record element returned :)
@@ -401,10 +360,8 @@ return
   <head>
     <meta charset="utf-8"/>
     <title>{"Term metadata for "||$ns||":"||$localName}</title>
-    <link href="{$html:stylesheetUrl}" rel="stylesheet"/>
   </head>
   <body>{
-    html:generate-header(),
     html:term-metadata($record,$version,$linkedMetadata,$ns),
     <br/>,
     <p><strong>Metadata about this term are available in the following formats/serializations:</strong></p>,
@@ -457,10 +414,8 @@ return
   <head>
     <meta charset="utf-8"/>
     <title>{"Metadata for the "||$record/version_issued/text()||" version of the term "||$ns||":"||$record/term_localName/text()}</title>
-    <link href="{$html:stylesheetUrl}" rel="stylesheet"/>
   </head>
   <body>{
-    html:generate-header(),
      <strong>{"Metadata for the "||$record/version_issued/text()||" version of the term "||$ns||":"||$record/term_localName/text()}</strong>,
      <br/>,
     html:term-version-metadata($record,$versionOf,$replacements,$ns),
@@ -503,10 +458,8 @@ return
   <head>
     <meta charset="utf-8"/>
     <title>{$vocabularyMetadata/label/text()}</title>
-    <link href="{$html:stylesheetUrl}" rel="stylesheet"/>
   </head>
   <body>{
-    html:generate-header(),
     html:generate-vocabulary-metadata-html($vocabularyMetadata),
     html:generate-vocabulary-toc-etc-html($vocabularyIri),
     html:generate-vocabulary-table-html($vocabularyIri),
@@ -556,17 +509,17 @@ return
 declare function html:generate-vocabulary-toc-etc-html($vocabularyIri as xs:string) as element()
 {
 <div>
-  <h2>Table of Contents</h2>
+  <h1>Table of Contents</h1>
   <ul style="list-style: none;">
     <li><a href="#1">1 Introduction</a></li>
     <li><a href="#2">2 Vocabulary versions</a></li>
     <li><a href="#3">3 Vocabulary distributions</a></li>
     <li><a href="#4">4 Term lists that are part of this vocabulary</a></li>
   </ul>
-  <h2><a id="1">1 Introduction</a></h2>
+  <h1><a id="1">1 Introduction</a></h1>
   <p>This document provides access to the parts and history of this vocabulary.  A TDWG vocabulary is composed of term lists that have been minted by TDWG as part of this vocabulary, or that may be composed of terms borrowed from other vocabularies within or outisde of TDWG.  The vocabulary changes over time as those lists change, or as new term lists are added to the vocabulary.  These changes are documented by versions of the vocabulary, which are &quot;snapshots&quot; of the vocabulary at the time that the version was issued.</p>
   <p>For more information about the structure and version model of TDWG vocabularies, see the <a href="http://www.tdwg.org/standards/147">TDWG Standards Documentation Specification</a>.</p>
-  <h2><a id="2">2 Vocabulary versions</a></h2>
+  <h1><a id="2">2 Vocabulary versions</a></h1>
   <p>To examine specific historical versions of this vocabulary, click on one of the links below.</p>
   <ul style="list-style: none;">{
 
@@ -576,7 +529,7 @@ declare function html:generate-vocabulary-toc-etc-html($vocabularyIri as xs:stri
     where $version/vocabulary/text() = $vocabularyIri and exists($version/version) (: screen out other linked metadata not related to versions:)
     return <li><a href="{$version/version/text()}">{$version/version/text()}</a></li>
   }</ul>
-  <h2><a id="3">3 Vocabulary distributions</a></h2>
+  <h1><a id="3">3 Vocabulary distributions</a></h1>
   <p>This vocabulary is available in the formats or distribution methods listed in the table below.  Please note that distribution access URLs may be subject to change over time.  Therefore, it is preferable to request the abstract IRI of the resources and request the desired Content-type through content negotiation.</p>
   <table border="1">{
     let $iri := html:substring-before-last($vocabularyIri,"/")
@@ -588,8 +541,7 @@ declare function html:generate-vocabulary-toc-etc-html($vocabularyIri as xs:stri
     <tr><td>JSON-LD</td><td>{$iri||".json"}</td><td><a href="{$iri||'.json'}">{$iri||".json"}</a></td></tr>
     )
   }</table>
-  <p> </p>
-  <h2><a id="4">4 Term lists that are part of this vocabulary</a></h2>
+  <h1><a id="4">4 Term lists that are part of this vocabulary</a></h1>
 </div>
 };
 
@@ -622,6 +574,15 @@ return
      </div>
 };
 
+(: Generate a footer and return it as a div element :)
+declare function html:generate-footer() as element()
+{
+<div>
+  <hr/>
+  <p>Content on this site, made open by <a href="http://www.tdwg.org/">Biodiversity Information Standards (TDWG)</a> is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</p>
+</div>
+};
+
 (:--------------------------------------------------------------------------------------------------:)
 (: Generate vocabulary version web page ////////////////////////////////////////////////////////////:)
 (:--------------------------------------------------------------------------------------------------:)
@@ -638,10 +599,8 @@ return
   <head>
     <meta charset="utf-8"/>
     <title>{$vocabularyVersionMetadata/label/text()||" "||$vocabularyVersionMetadata/version_issued/text()||" version"}</title>
-    <link href="{$html:stylesheetUrl}" rel="stylesheet"/>
   </head>
   <body>{
-    html:generate-header(),
     html:generate-vocabulary-version-metadata-html($vocabularyVersionMetadata),
     html:generate-vocabulary-version-toc-etc-html($vocabularyVersionIri),
     html:generate-vocabulary-version-table-html($vocabularyVersionIri),
@@ -689,17 +648,17 @@ return
 declare function html:generate-vocabulary-version-toc-etc-html($vocabularyVersionIri as xs:string) as element()
 {
 <div>
-  <h2>Table of Contents</h2>
+  <h1>Table of Contents</h1>
   <ul style="list-style: none;">
     <li><a href="#1">1 Introduction</a></li>
     <li><a href="#2">2 Vocabulary version distributions</a></li>
     <li><a href="#3">3 Term list versions that were part of this vocabulary when this version of it was issued</a></li>
   </ul>
-  <h2><a id="1">1 Introduction</a></h2>
+  <h1><a id="1">1 Introduction</a></h1>
   <p>A TDWG vocabulary is composed of term lists that have been minted by TDWG as part of that vocabulary, or that may be composed of terms borrowed from other vocabularies within or outisde of TDWG.  The vocabulary changes over time as those lists change, or as new term lists are added to the vocabulary.</p> 
   <p>This vocabulary version is a &quot;snapshot&quot; of the vocabulary at a particular moment in time.  The term list versions listed below includes those that were part of the vocabulary at the time this version was issued.  The status of an individual term list may have changed since the time that the vocabulary version was issued.  The version status indicates the status of the list at the present time, not at the time the vocabulary was issued.</p>
   <p>For more information about the structure and version model of TDWG vocabularies, see the <a href="http://www.tdwg.org/standards/147">TDWG Standards Documentation Specification</a>.</p>
-  <h2><a id="2">2 Vocabulary version distributions</a></h2>
+  <h1><a id="2">2 Vocabulary version distributions</a></h1>
   <p>This vocabulary versions list is available in the formats or distribution methods listed in the table below.  Please note that distribution access URLs may be subject to change over time.  Therefore, it is preferable to request the abstract IRI of the resources and request the desired Content-type through content negotiation.</p>
   <table border="1">{
     let $iri := $vocabularyVersionIri
@@ -711,7 +670,7 @@ declare function html:generate-vocabulary-version-toc-etc-html($vocabularyVersio
     <tr><td>JSON-LD</td><td>{$iri||".json"}</td><td><a href="{$iri||'.json'}">{$iri||".json"}</a></td></tr>
     )
   }</table>
-  <h2><a id="3">3 Term list versions that were part of this vocabulary when this version of it was issued</a></h2>
+  <h1><a id="3">3 Term list versions that were part of this vocabulary when this version of it was issued</a></h1>
 </div>
 };
 
@@ -770,10 +729,8 @@ return
   <head>
     <meta charset="utf-8"/>
     <title>{$listMetadata/label/text()}</title>
-    <link href="{$html:stylesheetUrl}" rel="stylesheet"/>
   </head>
   <body>{
-    html:generate-header(),
     html:generate-list-metadata-html($listMetadata,$std,$version),
     html:generate-list-toc-etc-html($termListIri),
     html:generate-list-html(html:find-list-dbname($termListIri),$ns),
@@ -800,15 +757,13 @@ return
   <head>
     <meta charset="utf-8"/>
     <title>{$listMetadata/label/text()}</title>
-    <link href="{$html:stylesheetUrl}" rel="stylesheet"/>
   </head>
   <body>{
-    html:generate-header(),
     html:generate-list-metadata-html($listMetadata,$std,$version),
 
   if ($termListIri = html:subdomain()||"dwc/terms/")
   then (
-    <h2>Note: This is the list of core terms defined by Darwin Core. For the <a href="https://dwc.tdwg.org/terms/">Darwin Core Quick Reference Guide</a>, please bookmark <a href="https://dwc.tdwg.org/terms/">https://dwc.tdwg.org/terms/</a><br/></h2>
+    <h1>Note: This is the list of core terms defined by Darwin Core. For the <a href="https://dwc.tdwg.org/terms/">Darwin Core Quick Reference Guide</a>, please bookmark <a href="https://dwc.tdwg.org/terms/">https://dwc.tdwg.org/terms/</a><br/></h1>
     )
   else (),
 
@@ -865,17 +820,17 @@ return
 declare function html:generate-list-toc-etc-html($termListIri as xs:string) as element()
 {
 <div>
-  <h2>Table of Contents</h2>
+  <h1>Table of Contents</h1>
   <ul style="list-style: none;">
     <li><a href="#1">1 Introduction</a></li>
     <li><a href="#2">2 List versions</a></li>
     <li><a href="#3">3 List distributions</a></li>
     <li><a href="#4">4 Terms that are members of this list</a></li>
   </ul>
-  <h2><a id="1">1 Introduction</a></h2>
+  <h1><a id="1">1 Introduction</a></h1>
   <p>This is a list of terms that may be part of a TDWG vocabulary.  If the terms on this list are defined by TDWG, the list corresponds to terms in a namespace whose IRI is listed in the header.  In the case where the terms are borrowed from a non-TDWG vocabulary, the list includes terms that are &quot;borrowed&quot; for inclusion in a TDWG vocabulary.  The list includes all &quot;current&quot; terms on the list, which may or may not be recommended for use.  Terms that are no longer recommended for use may have specified replacements - see the metadata about that specific term.</p>
   <p>For more information about the structure and version model of TDWG vocabularies, see the <a href="http://www.tdwg.org/standards/147">TDWG Standards Documentation Specification</a>.</p>
-  <h2><a id="2">2 List versions</a></h2>
+  <h1><a id="2">2 List versions</a></h1>
   <p>List versions are &quot;snapshots&quot; of the term list at a particular point in time. To examine specific historical versions of this list, click on one of the links below.</p>
   <ul style="list-style: none;">{
     let $listRaw := html:generateLinkedMetadata("term-lists")
@@ -884,7 +839,7 @@ declare function html:generate-list-toc-etc-html($termListIri as xs:string) as e
     where $version/list/text() = $termListIri
     return <li><a href="{$version/version/text()}">{$version/version/text()}</a></li>
   }</ul>
-  <h2><a id="3">3 List distributions</a></h2>
+  <h1><a id="3">3 List distributions</a></h1>
   <p>This term list is available in the formats or distribution methods listed in the table below.  Please note that distribution access URLs may be subject to change over time.  Therefore, it is preferable to request the abstract IRI of the resources and request the desired Content-type through content negotiation.</p>
   <table border="1">{
     let $iri := html:substring-before-last($termListIri,"/")
@@ -896,8 +851,7 @@ declare function html:generate-list-toc-etc-html($termListIri as xs:string) as e
     <tr><td>JSON-LD</td><td>{$iri||".json"}</td><td><a href="{$iri||'.json'}">{$iri||".json"}</a></td></tr>
     )
   }</table>
-  <p> </p>
-  <h2><a id="4">4 Terms that are members of this list</a></h2>
+  <h1><a id="4">4 Terms that are members of this list</a></h1>
 </div>
 };
 
@@ -950,10 +904,8 @@ return
   <head>
     <meta charset="utf-8"/>
     <title>{$listMetadata/label/text()||" "||$listMetadata/version_modified/text()||" version"}</title>
-    <link href="{$html:stylesheetUrl}" rel="stylesheet"/>
   </head>
   <body>{
-    html:generate-header(),
     html:generate-list-versions-metadata-html($listMetadata,$std,$termListIri),
     html:generate-list-versions-toc-etc-html($termListVersionIri),
     html:generate-list-versions-html(html:find-list-version-dbname($termListIri),$ns,$members),
@@ -1019,17 +971,17 @@ return
 declare function html:generate-list-versions-toc-etc-html($termListVersionIri as xs:string) as element()
 {
 <div>
-  <h2>Table of Contents</h2>
+  <h1>Table of Contents</h1>
   <ul style="list-style: none;">
     <li><a href="#1">1 Introduction</a></li>
     <li><a href="#2">2 List version distributions</a></li>
     <li><a href="#3">3 Term versions that were members of this list when this version of it was issued</a></li>
   </ul>
-  <h2><a id="1">1 Introduction</a></h2>
+  <h1><a id="1">1 Introduction</a></h1>
   <p>This is a list of term versions that may be part of a TDWG vocabulary.  If the terms whose versions are on this list were defined by TDWG, the list corresponds to term versions in a namespace whose IRI is listed in the header.  In the case where the terms were borrowed from a non-TDWG vocabulary, the list includes term versions that were &quot;borrowed&quot; for inclusion in a TDWG vocabulary.</p>
   <p>This list includes term versions that were part of the term list at the time this version was issued.  The status of the individual terms may have changed since the version was issued.  The version status indicates its status at the present time, not at the time the list version was issued.</p>
   <p>For more information about the structure and version model of TDWG vocabularies, see the <a href="http://www.tdwg.org/standards/147">TDWG Standards Documentation Specification</a>.</p>
-  <h2><a id="2">2 List version distributions</a></h2>
+  <h1><a id="2">2 List version distributions</a></h1>
   <p>This term versions list is available in the formats or distribution methods listed in the table below.  Please note that distribution access URLs may be subject to change over time.  Therefore, it is preferable to request the abstract IRI of the resources and request the desired Content-type through content negotiation.</p>
   <table border="1">{
     let $iri := $termListVersionIri
@@ -1041,7 +993,7 @@ declare function html:generate-list-versions-toc-etc-html($termListVersionIri as
     <tr><td>JSON-LD</td><td>{$iri||".json"}</td><td><a href="{$iri||'.json'}">{$iri||".json"}</a></td></tr>
     )
   }</table>
-  <h2><a id="3">3 Term versions that were members of this list when this version of it was issued</a></h2>
+  <h1><a id="3">3 Term versions that were members of this list when this version of it was issued</a></h1>
 </div>
 };
 
@@ -1098,7 +1050,7 @@ return
   <head>
     <meta charset="utf-8"/>
     <title>Test</title>
-    <link href="{$html:stylesheetUrl}" rel="stylesheet"/>
+      <link href="https://raw.githubusercontent.com/baskaufs/tdwg-standards/master/html/config/default.css" rel="stylesheet" type="text/css"/>
   </head>
   <body>
      <table cellspacing="0" class="border">
