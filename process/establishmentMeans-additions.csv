@@ -1,0 +1,7 @@
+term_localName,label,definition,usage,notes,rdf_value,rdf_type
+e001,native (indigenous),,,,native,http://www.w3.org/2004/02/skos/core#Concept
+e002,native: reintroduced,,,,nativeReintroduced,http://www.w3.org/2004/02/skos/core#Concept
+e003,"introduced (alien, exotic, non-native, nonindigenous)",,,,introduced,http://www.w3.org/2004/02/skos/core#Concept
+e004,introduced: assisted colonisation,,,,introducedAssistedColonisation,http://www.w3.org/2004/02/skos/core#Concept
+e005,vagrant (casual),,,,vagrant,http://www.w3.org/2004/02/skos/core#Concept
+e006,"uncertain (unknown, cryptogenic)",,,,uncertain,http://www.w3.org/2004/02/skos/core#Concept
