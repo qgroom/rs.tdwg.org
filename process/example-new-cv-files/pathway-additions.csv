@@ -1,0 +1,54 @@
+term_localName,label,skos_broader,definition,usage,notes,rdf_value,rdf_type
+p001,biologicalControl,p045,Biological control,,,biologicalControl,http://www.w3.org/2004/02/skos/core#Concept
+p002,erosionControl,p045,"Erosion control/ dune stabilization (windbreaks, hedges, …)",,,erosionControl,http://www.w3.org/2004/02/skos/core#Concept
+p003,fisheryInTheWild,p045,Fishery in the wild (including game fishing),,,fisheryInTheWild,http://www.w3.org/2004/02/skos/core#Concept
+p004,hunting,p045,Hunting,,,hunting,http://www.w3.org/2004/02/skos/core#Concept
+p005,landscapeImprovement,p045,Landscape/flora/fauna “improvement” in the wild,,,landscapeImprovement,http://www.w3.org/2004/02/skos/core#Concept
+p006,conservationOrWildlifeManagement,p045,Introduction for conservation purposes or wildlife management,,,conservationOrWildlifeManagement,http://www.w3.org/2004/02/skos/core#Concept
+p007,releasedForUse,p045,"Release in nature for use (other than above, e.g., fur, transport, medical use)",,,releasedForUse,http://www.w3.org/2004/02/skos/core#Concept
+p008,otherIntentionalRelease,p045,Other intentional release,,,otherIntentionalRelease,http://www.w3.org/2004/02/skos/core#Concept
+p009,agriculture,p046,Agriculture (including Biofuel feedstocks),,,agriculture,http://www.w3.org/2004/02/skos/core#Concept
+p010,aquacultureMariculture,p046,Aquaculture / mariculture,,,aquacultureMariculture,http://www.w3.org/2004/02/skos/core#Concept
+p011,publisGardenZooAquaria,p046,Botanical garden/zoo/aquaria (excluding domestic aquaria),,,publisGardenZooAquaria,http://www.w3.org/2004/02/skos/core#Concept
+p012,pet,p046,Pet/aquarium/terrarium species (including live food for such species ),,,pet,http://www.w3.org/2004/02/skos/core#Concept
+p013,farmedAnimals,p046,Farmed animals (including animals left under limited control),,,farmedAnimals,http://www.w3.org/2004/02/skos/core#Concept
+p014,forestry,p046,Forestry (including reforestation),,,forestry,http://www.w3.org/2004/02/skos/core#Concept
+p015,fur,p046,Fur farms,,,fur,http://www.w3.org/2004/02/skos/core#Concept
+p016,horticulture,p046,Horticulture,,,horticulture,http://www.w3.org/2004/02/skos/core#Concept
+p017,ornamentalNonHorticulture,p046,Ornamental purpose other than horticulture,,,ornamentalNonHorticulture,http://www.w3.org/2004/02/skos/core#Concept
+p018,research,p046,Research and ex-situ breeding (in facilities),,,research,http://www.w3.org/2004/02/skos/core#Concept
+p019,liveFoodLiveBait,p046,Live food and live bait,,,liveFoodLiveBait,http://www.w3.org/2004/02/skos/core#Concept
+p020,otherEscape,p046,Other escape from confinement,,,otherEscape,http://www.w3.org/2004/02/skos/core#Concept
+p021,contaminantNursery,p047,Contaminant nursery material,,,contaminantNursery,http://www.w3.org/2004/02/skos/core#Concept
+p022,contaminateBait,p047,Contaminated bait,,,contaminateBait,http://www.w3.org/2004/02/skos/core#Concept
+p023,foodContaminant,p047,Food contaminant (including of live food),,,foodContaminant,http://www.w3.org/2004/02/skos/core#Concept
+p024,contaminantOnAnimals,p047,"Contaminant on animals (except parasites, species transported by host/vector)",,,contaminantOnAnimals,http://www.w3.org/2004/02/skos/core#Concept
+p025,parasitesOnAnimals,p047,Parasites on animals (including species transported by host and vector),,,parasitesOnAnimals,http://www.w3.org/2004/02/skos/core#Concept
+p026,contaminantOnPlants,p047,"Contaminant on plants (except parasites, species transported by host/vector)",,,contaminantOnPlants,http://www.w3.org/2004/02/skos/core#Concept
+p027,parasitesOnPlants,p047,Parasites on plants (including species transported by host and vector),,,parasitesOnPlants,http://www.w3.org/2004/02/skos/core#Concept
+p028,seedContaminant,p047,Seed contaminant,,,seedContaminant,http://www.w3.org/2004/02/skos/core#Concept
+p029,timberTrade,p047,Timber trade,,,timberTrade,http://www.w3.org/2004/02/skos/core#Concept
+p030,transportationHabitatMaterial,p047,"Transportation of habitat material (soil, vegetation,…)",,,transportationHabitatMaterial,http://www.w3.org/2004/02/skos/core#Concept
+p031,fishingEquipment,p048,Angling/fishing equipment,,,fishingEquipment,http://www.w3.org/2004/02/skos/core#Concept
+p032,containerBulk,p048,Container/bulk,,,containerBulk,http://www.w3.org/2004/02/skos/core#Concept
+p033,hitchhikersAirplane,p048,Hitchhikers in or on airplane,,,hitchhikersAirplane,http://www.w3.org/2004/02/skos/core#Concept
+p034,hitchhikersShip,p048,Hitchhikers on ship/boat (excluding ballast water and hull fouling),,,hitchhikersShip,http://www.w3.org/2004/02/skos/core#Concept
+p035,machineryEquipment,p048,Machinery/equipment,,,machineryEquipment,http://www.w3.org/2004/02/skos/core#Concept
+p036,people,p048,People and their luggage/equipment (in particular tourism),,,people,http://www.w3.org/2004/02/skos/core#Concept
+p037,packingMaterial,p048,"Organic packing material, in particular wood packaging",,,packingMaterial,http://www.w3.org/2004/02/skos/core#Concept
+p038,ballastWater,p048,Ship/boat ballast water,,,ballastWater,http://www.w3.org/2004/02/skos/core#Concept
+p039,hullFouling,p048,Ship/boat hull fouling,,,hullFouling,http://www.w3.org/2004/02/skos/core#Concept
+p040,vehicles,p048,"Vehicles (car, train, …)",,,vehicles,http://www.w3.org/2004/02/skos/core#Concept
+p041,otherTransport,p048,Other means of transport,,,otherTransport,http://www.w3.org/2004/02/skos/core#Concept
+p042,waterwaysBasinsSeas,p049,Interconnected waterways/basins/seas,,,waterwaysBasinsSeas,http://www.w3.org/2004/02/skos/core#Concept
+p043,tunnelsBridges,p049,Tunnels and land bridges,,,tunnelsBridges,http://www.w3.org/2004/02/skos/core#Concept
+p044,naturalDispersal,p050,Natural dispersal across borders of invasive alien species that have been,,,naturalDispersal,http://www.w3.org/2004/02/skos/core#Concept
+p045,,p051,Release in nature,,,,http://www.w3.org/2004/02/skos/core#Concept
+p046,,p051,Escape from confinement,,,,http://www.w3.org/2004/02/skos/core#Concept
+p047,,p052,Transport-contaminant,,,,http://www.w3.org/2004/02/skos/core#Concept
+p048,,p053,Transport-stowaway,,,,http://www.w3.org/2004/02/skos/core#Concept
+p049,,p053,Corridor,,,,http://www.w3.org/2004/02/skos/core#Concept
+p050,,p053,Unaided,,,,http://www.w3.org/2004/02/skos/core#Concept
+p051,,,Intentional,,,,http://www.w3.org/2004/02/skos/core#Concept
+p052,,,Unintentional,,,,http://www.w3.org/2004/02/skos/core#Concept
+p053,,,Corridor & Dispersal,,,,http://www.w3.org/2004/02/skos/core#Concept
